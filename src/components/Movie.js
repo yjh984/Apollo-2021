@@ -3,8 +3,11 @@ import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 
 const Container=styled.div`
-    height: 420px;
+    height: 300px;
     width: 100%;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    overflow: hidden;
+    border-radius: 7px;
 `;
 const Poster=styled.div`
     background-image: url(${props=>props.bg});
@@ -14,11 +17,11 @@ const Poster=styled.div`
     background-position: center center;
 `;
 
-export default ({id, medium_cover_image})=> (
+export default ({id, bg})=> (
     <Container>
         {/* {console.log(id, medium_cover_image)} */}
         <Link to={`/${id}`}>
-            <Poster bg={medium_cover_image}/>
+            <Poster bg={bg}/>
         </Link>
     </Container>
 );

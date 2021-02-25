@@ -6,7 +6,7 @@ import Movie from '../components/Movie';
 
 const GET_MOVIES=gql`
     {
-        movies(limit:20,rating:8,year:2020){
+        movies(limit:40,rating:8,year:2020){
             id
             title
             year
@@ -23,18 +23,32 @@ const Container=styled.div`
     border-radius: 5px;
 `;
 
-const Headers=styled.div`
-    font-size: 20px;
-    background-color: rgba(214,75,156,1);
-    padding: 20px 150px 20px 150px;
-    color: #adaeb9;
-    box-shadow: 0 13px 27px -5px rgba(50, 50, 93, 0.25),
-      0 8px 16px -8px rgba(0, 0, 0, 0.3), 0 -6px 16px -6px rgba(0, 0, 0, 0.025);
+// const Headers=styled.div`
+//     font-size: 20px;
+//     background-color: rgba(214,75,156,1);
+//     padding: 20px 150px 20px 150px;
+//     color: #adaeb9;
+//     box-shadow: 0 13px 27px -5px rgba(50, 50, 93, 0.25),
+//       0 8px 16px -8px rgba(0, 0, 0, 0.3), 0 -6px 16px -6px rgba(0, 0, 0, 0.025);
 
+// `;
+
+const Headers=styled.header`
+    background-image: linear-gradient(-45deg,#d754ab,#fd723a);
+    padding-bottom: 40px;
+    height: 45vh;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%
 `;
 
 const Title = styled.h1`
-    font-size: 30px;
+    font-size: 60px;
+    font-weight: 600;
+    margin-bottom: 20px;
 `;
 
 
@@ -53,7 +67,10 @@ const Movies=styled.div`
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap:25px;
-    width: 100%;
+    width: 90%;
+    height: 10%;
+    position: relative;
+    top: -50px;
 `;
 
 export default()=>{
@@ -71,7 +88,7 @@ export default()=>{
               <Movies>
                 {data.movies.map(m=>(
                   <Movie key={m.id} id={m.id}
-                   medium_cover_image={m.medium_cover_image}/>))}
+                   bg={m.medium_cover_image}/>))}
               </Movies>
             }
         </Container>
