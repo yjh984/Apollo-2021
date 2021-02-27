@@ -62,15 +62,26 @@ const Loading=styled.div`
     font-weight: 500;
     margin-top: 10px;
 `;
-
+// const Movies_Box=styled.div`
+//     display:flex;
+//     flex-direction:row;
+//     justify-content: center;
+//     align-items: space-around;
+//     width: 100%
+// `;
 const Movies=styled.div`
+    // margin-left:300px;
+    // margin-right:300px;
+    // width: 50vh;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap:25px;
-    width: 90%;
-    height: 10%;
+    // padding-left: 50px;
+    // padding-right:50%;
+    width: 60%;
+    // height: 10%;
     position: relative;
-    top: -50px;
+    top: -30px;
 `;
 
 export default()=>{
@@ -83,14 +94,24 @@ export default()=>{
                 <Subtitle>GraphQL is good!</Subtitle>
             </Headers>
             {loading && <Loading>Loading...</Loading>}
-            {!loading && 
-             data.movies && 
+            {/* {!loading && 
+             data.movies &&  */}
+             {/* <Movies_Box>
+               <div>{'\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0'}</div>
+               <div>.......................................</div>
+               <div>{'\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0'}</div>
+               <div>{'\u00A0\u00A0\u00A0\u00A0\u00A0'} </div> */}
               <Movies>
-                {data.movies.map(m=>(
+                {data?.movies?.map(m=>(
                   <Movie key={m.id} id={m.id}
                    bg={m.medium_cover_image}/>))}
               </Movies>
-            }
+               {/* {'\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0'}
+               <div>........................................</div>
+               {'\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0'}
+               {'\u00A0\u00A0\u00A0\u00A0\u00A0'} 
+             </Movies_Box> */}
+            {/* } */}
         </Container>
     );
 }

@@ -13,6 +13,10 @@ const GET_MOVIE=gql`
             rating
             description_intro
         }
+        suggestions(id:$id){
+            id
+            medium_cover_image
+        }
     }
 `;
 
@@ -42,6 +46,11 @@ const Description=styled.p`
     width: 350px;
 `;
 
+const Suggest=styled.div`
+    font-size: 9px;
+    width: 350px;
+`;
+
 const Poster=styled.div`
     // width: 220%;
     // height: 65%;
@@ -65,16 +74,20 @@ export default()=>{
             <Column>
                 <Title>{loading? "Loading":data.movie.title}</Title>
                 {/* 반드시 loading후 data를 사용할 것 */}
-                {!loading && data.movie && (
-                    <>
-                    <Subtitle>{data.movie.language}/{data.movie.rating}</Subtitle>
-                    <Description>{data.movie.description_intro}</Description>
-                    </>
-                )}
-                
+                {/* {!loading && data.movie && (
+                    <> */}
+                    <Subtitle>{data?.movie?.language}{loading?"":"/"}{data?.movie?.rating}</Subtitle>
+                    <Description>{data?.movie?.description_intro}</Description>
+                    {/* </>
+                )} */}
+                {<div>----- </div>}
+                {data?.suggestions?.map(s=><Suggest>
+                {s.id}:{s.medium_cover_image}
+                </Suggest>)}
             </Column>
             {!loading && 
-             <Poster bg={data&&data.movie? data.movie.medium_cover_image:""}></Poster>}
+             <Poster bg={data?.movie?.medium_cover_image}></Poster>}
+             {/* <Poster bg={data&&data.movie? data.movie.medium_cover_image:""}/> */}
         </Container>
     )
 }
