@@ -4,7 +4,7 @@ import {useQuery} from '@apollo/react-hooks';
 import styled from 'styled-components';
 import Movie from '../components/Movie';
 
-const GET_MOVIES=gql`
+let GET_MOVIES=gql`
     {
         movies(limit:40,rating:8,year:2020){
             id
@@ -12,6 +12,7 @@ const GET_MOVIES=gql`
             year
             rating
             medium_cover_image
+            isLiked @client
         }
     }
 `;
@@ -49,6 +50,7 @@ const Title = styled.h1`
     font-size: 60px;
     font-weight: 600;
     margin-bottom: 20px;
+    display: flex;
 `;
 
 
@@ -61,6 +63,7 @@ const Loading=styled.div`
     opcity: 0.5;
     font-weight: 500;
     margin-top: 10px;
+    align-items: center;
 `;
 // const Movies_Box=styled.div`
 //     display:flex;
@@ -69,6 +72,23 @@ const Loading=styled.div`
 //     align-items: space-around;
 //     width: 100%
 // `;
+const Button=styled.div`
+    display: flex;
+    align-items:left;
+    /* border: none; */
+    /* border-radius: 50%; */
+    color: white;
+    /* padding: 15px 32px; */
+    text-align: cneter;
+    text-decoration: none;
+    font-size: 16px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    margin-left : 20px;
+    margin-right:85%;
+    position: sticky;
+    top: 100px;
+`;
+
 const Movies=styled.div`
     // margin-left:300px;
     // margin-right:300px;
@@ -81,37 +101,41 @@ const Movies=styled.div`
     width: 60%;
     // height: 10%;
     position: relative;
-    top: -30px;
+    top: -50px;
+    align-items: center;
+    // border-radius: 7px;
 `;
 
-export default()=>{
+const Button1={
+    borderRadius: "5px",
+    align:"left"
+};
+
+const handlePreYear=()=>{
+    console.log("xxxxxxxxxxxxxxxxxx");
+}
+
+export default ()=>{
     const {loading, error, data} = useQuery(GET_MOVIES);
-    console.log(loading, error, data);
+    // console.log(loading, error, data);
+   
     return (
         <Container>
             <Headers>
                 <Title>Apollo 2021</Title>
                 <Subtitle>GraphQL is good!</Subtitle>
+                {loading && <Loading>Loading...</Loading>}
             </Headers>
-            {loading && <Loading>Loading...</Loading>}
-            {/* {!loading && 
-             data.movies &&  */}
-             {/* <Movies_Box>
-               <div>{'\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0'}</div>
-               <div>.......................................</div>
-               <div>{'\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0'}</div>
-               <div>{'\u00A0\u00A0\u00A0\u00A0\u00A0'} </div> */}
-              <Movies>
-                {data?.movies?.map(m=>(
-                  <Movie key={m.id} id={m.id}
-                   bg={m.medium_cover_image}/>))}
-              </Movies>
-               {/* {'\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0'}
-               <div>........................................</div>
-               {'\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0'}
-               {'\u00A0\u00A0\u00A0\u00A0\u00A0'} 
-             </Movies_Box> */}
-            {/* } */}
+            <Button>
+                <button style={Button1} onClick={handlePreYear}>Year-</button>
+                <button style={Button1} onClick={handlePreYear}>Year+</button>
+            </Button>
+            <Movies>                
+            {data?.movies?.map(m=>(
+                <Movie key={m.id} id={m.id}
+                isLiked={m.isLiked}
+                bg={m.medium_cover_image}/>))}
+            </Movies>
         </Container>
     );
 }
