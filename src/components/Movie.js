@@ -11,7 +11,7 @@ const TOGGLE_LIKE_MOVIE=gql`
 `;
 
 const Container=styled.div`
-    height: 250px;
+    height: 220px;
     width: 100%;
     box-shadow: 0 1px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     border-radius: 7px;
@@ -27,16 +27,10 @@ const Poster=styled.div`
     border-radius: 7px;
     // overflow:visible;
 `;
-// const Button=styled.div`
-//     background-color:red;
-//     border-radius: 3px;
-//     overflow:hidden;
-//     padding: -2px;
-//     margin:0px;
-// `;
+
 const Button={
     color:"red",
-    background:"teal",
+    background:"white",
     borderRadius: "5px",
 };
 export default ({id, isLiked, bg})=> {
